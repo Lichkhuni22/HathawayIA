@@ -367,7 +367,7 @@ void setup()
     pinMode(BUTTON_7_PIN,INPUT_PULLUP);
 
     //pinMode(keyIn4,INPUT_PULLUP);
-    //Serial.begin(9600);  // start serial port at 9600 bps:
+    Serial.begin(9600);  // start serial port at 9600 bps:
 }
 /************************************************/
 
@@ -382,47 +382,58 @@ void loop()
     
     switch (button_num){
       case 1:
+          Serial.println("Mode 1 On.");
           ledBarLitFull();
 
           FastLED.show();
           
         break;
       case 2:
-            
-      ledMode10On();
+          Serial.println("Mode 2 On.");
+          
+          ledMode10On();
 
         break;
       case 3:
+          Serial.println("Mode 3 On.");
           
           text3On();
           ledMode11On();
           
-          break;
-      
-    case 4:
-    text3On();
-    ledMode12On();
+        break;
+      case 4:
+          Serial.println("Mode 4 On.");
           
-      break;
+          text3On();
+          ledMode12On();
+          
+        break;
       case 5:
+          Serial.println("Mode 5 On.");
           text3On();
           
           ledMode1On();
       
         break;
-      case 6:
-          //text9On();
-          turnOffLed2();
-          attentionStatus();
-          FastLED.show();
-          break;
-//      case 7:
-//        normalStatus();
+//      case 6:
+//          //text9On();
+//          
+//          turnOffLed2();
+//          attentionStatus();
+//          FastLED.show();
+//
+//          
+//          break;
+////      case 7:
+////        normalStatus();
           
       default:
-      ledMode10On();
+//      ledMode10On();
       //ledMode1On();
         //normalStatus();
+      ledBarLitFull();
+
+      FastLED.show();
 
     }
 }
@@ -1664,6 +1675,8 @@ void readButtons(){
         {
           button_num = 1;
 
+          turnOffLed1();
+
           leds[72] = CRGB(255,0,255);
           leds[73] = CRGB(255,0,255);
           leds[74] = CRGB(255,0,255);
@@ -1674,10 +1687,18 @@ void readButtons(){
           leds[69] = CRGB(255,0,255);
           leds[68] = CRGB(255,0,255);
 
+          FastLED.show();
           
-          turnOffLed1();
-          turnOffLed2();
+//          turnOffLed1();
+//          turnOffLed2();
           i=0;
+
+          while (i<67){
+            leds[i+76] = CRGB(255,0,255);
+            leds[67-i] = CRGB(255,0,255);
+            FastLED.show();
+            i++;
+          }
           flag = true;
           //Serial.println(button_num);
         }
